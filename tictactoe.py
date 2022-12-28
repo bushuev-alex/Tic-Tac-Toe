@@ -7,7 +7,7 @@ if __name__ == "__main__":
     my_game.draw_table()
 
     while True:
-        print(f"'{my_game.gamer}' moves")
+        print(f"\n'{my_game.gamer}' moves")
         Coordinates = my_game.get_new_coordinates()
         my_game.make_move(Coordinates, my_game.gamer)
         my_game.draw_table()
