@@ -60,7 +60,7 @@ class TicTacToe:
         diag2 = [''.join(np.fliplr(matrix).diagonal())]
         return rows + cols + diag1 + diag2
 
-    def result(self, thrimers: list):
+    def result(self, thrimers: list) -> str:
         if any(map(lambda x: x == "XXX", thrimers)):
             return 'X wins'
         elif any(map(lambda x: x == "OOO", thrimers)):
