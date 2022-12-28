@@ -1,0 +1,19 @@
+from game import TicTacToe, Coordinates
+my_game = TicTacToe()
+if __name__ == "__main__":
+
+    my_game.greet()
+    my_game.gamer = "X"
+    my_game.draw_table()
+
+    while True:
+        print(f"'{my_game.gamer}' moves")
+        Coordinates = my_game.get_new_coordinates()
+        my_game.make_move(Coordinates, my_game.gamer)
+        my_game.draw_table()
+        thrimers_list = my_game.get_table_thrimers()
+        result = my_game.result(thrimers_list)
+        if result != 'Game not finished':
+            print(result)
+            break
+        my_game.change_gamer()
