@@ -2,7 +2,7 @@ import numpy as np
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(slots=True, frozen=True)
 class Coordinates:
     x: int
     y: int
@@ -52,22 +52,23 @@ class TicTacToe:
             except ValueError:
                 print("You should enter 2 numbers!")
 
-    def get_table_thrimers(self) -> list:
+    def get_table_thrimers(self) -> tuple:
         matrix = np.asarray(self.lines)
         rows = [''.join(matrix[:, i]) for i in range(3)]
         cols = [''.join(matrix[i, :]) for i in range(3)]
-        diag1 = [''.join(matrix.diagonal())]
-        diag2 = [''.join(np.fliplr(matrix).diagonal())]
-        return rows + cols + diag1 + diag2
+        diag_1 = [''.join(matrix.diagonal())]
+        diag_2 = [''.join(np.fliplr(matrix).diagonal())]
+        return rows, cols, diag_1, diag_2
 
-    def result(self, thrimers: list) -> str:
-        if any(map(lambda x: x == "XXX", thrimers)):
+    def get_result(self, rows: list, cols: list, diag_1: list, diag_2: list) -> str:
+        thrimers = rows + cols + diag_1 + diag_2
+        if any(map(lambda x: x == "XXX", thrimers)):  # if "XXX" in row/col, returns X wins
             return 'X wins'
-        elif any(map(lambda x: x == "OOO", thrimers)):
+        elif any(map(lambda x: x == "OOO", thrimers)):  # if "OOO" in row/col, returns O wins
             return 'O wins'
-        elif all(map(lambda x: " " not in x, thrimers)):
+        elif all(map(lambda x: " " not in x, rows)):  # if there is no " " in all table, returns Draw
             return 'Draw'
-        elif any(map(lambda x: " " in x, thrimers)):
+        elif any(map(lambda x: " " in x, rows)):  # if any " " in all table, returns Game not finished
             return 'Game not finished'
         else:
             return 'Impossible'
