@@ -15,7 +15,7 @@ class TicTacToe:
         self.gamer = None
 
     def greet(self):
-        print("-----------------")
+        print("\n-----------------")
         print("  Greeting you   ")
         print("     in game     ")
         print("   Tic-Tac-Toe   ")
