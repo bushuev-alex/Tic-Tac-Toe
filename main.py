@@ -11,8 +11,8 @@ while True:
     coordinates = my_game.get_new_coordinates()
     my_game.make_move(coordinates, my_game.gamer)
     my_game.draw_table()
-    rows, cols, diag_lr, diag_rl = my_game.get_table_thrimers()
-    result = my_game.get_result(rows, cols, diag_lr, diag_rl)
+    rows, cols, diag_lr, diag_rl = my_game.get_field_lines()
+    result = my_game.get_game_result(rows, cols, diag_lr, diag_rl)
     if result != 'Game not finished':
         print(result)
         break
