@@ -97,7 +97,9 @@ class TicTacToe:
             x, y = random.choice([1, 2, 3]), random.choice([1, 2, 3])
             return x, y
         if self.gamers[gamer] == "hard":
-            pass
+            result = None
+            while result != 'Game not finished':
+                pass
 
     def get_new_coordinates(self, gamer: str) -> Coordinates:
         while True:
