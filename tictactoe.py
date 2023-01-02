@@ -8,6 +8,14 @@ class Coordinates:
     y: int
 
 
+@dataclass(slots=True, frozen=True)
+class FieldLines:
+    rows: list
+    cols: list
+    diag_lr: list
+    diag_rl: list
+
+
 class TicTacToe:
 
     def __init__(self):
@@ -53,23 +61,23 @@ class TicTacToe:
             except ValueError:
                 print("You should enter 2 numbers!")
 
-    def get_field_lines(self) -> tuple:
+    def get_field_lines(self) -> FieldLines:
         matrix = np.asarray(self.field)
         rows = [''.join(matrix[:, i]) for i in range(3)]
         cols = [''.join(matrix[i, :]) for i in range(3)]
         diag_lr = [''.join(matrix.diagonal())]
         diag_rl = [''.join(np.fliplr(matrix).diagonal())]
-        return rows, cols, diag_lr, diag_rl
+        return FieldLines(rows, cols, diag_lr, diag_rl)
 
-    def get_game_result(self, rows: list, cols: list, diag_lr: list, diag_rl: list) -> str:
-        lines = rows + cols + diag_lr + diag_rl
-        if any(map(lambda x: x == "XXX", lines)):  # "XXX" in row/col, returns X wins
+    def get_game_result(self, field_lines: FieldLines) -> str:
+        all_lines = field_lines.rows + field_lines.cols + field_lines.diag_lr + field_lines.diag_rl
+        if any(map(lambda x: x == "XXX", all_lines)):  # "XXX" in row/col, returns X wins
             return 'X wins'
-        elif any(map(lambda x: x == "OOO", lines)):  # "OOO" in row/col, returns O wins
+        elif any(map(lambda x: x == "OOO", all_lines)):  # "OOO" in row/col, returns O wins
             return 'O wins'
-        elif all(map(lambda x: " " not in x, rows)):  # there isn't " " (and nobody wins) in all table, returns Draw
+        elif all(map(lambda x: " " not in x, field_lines.rows)):  # there isn't " " (and nobody wins) in all table, returns Draw
             return 'Draw'
-        elif any(map(lambda x: " " in x, rows)):  # if any " " in all table, returns Game not finished
+        elif any(map(lambda x: " " in x, field_lines.rows)):  # if any " " in all table, returns Game not finished
             return 'Game not finished'
         else:
             return 'Impossible'
