@@ -7,7 +7,7 @@ command, levels = my_game.get_command_and_gamers()
 if command == "start":
     my_game.set_levels_to_gamers(levels)
     my_game.greet()
-    my_game.gamer = "X"
+    my_game.set_gamer_to_move("X")
     my_game.draw_table()
 
     while True:

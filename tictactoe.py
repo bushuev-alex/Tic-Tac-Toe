@@ -26,6 +26,9 @@ class TicTacToe:
         self.gamers = {"X": None, "O": None}
         self.user_list = ("user", "easy", "medium", "hard")
 
+    def set_gamer_to_move(self, gamer: str) -> None:
+        self.gamer = gamer
+
     def greet(self):
         print("\n-----------------")
         print("  Greeting you   ")
@@ -130,7 +133,7 @@ class TicTacToe:
             return 'X wins'
         elif any(map(lambda x: x == "OOO", all_lines)):  # "OOO" in row/col, returns O wins
             return 'O wins'
-        elif all(map(lambda x: " " not in x, field_lines.rows)):  # there isn't " " (and nobody wins) in all table, returns Draw
+        elif all(map(lambda x: " " not in x, field_lines.rows)):  # no " " in all table and nobody wins, returns Draw
             return 'Draw'
         elif any(map(lambda x: " " in x, field_lines.rows)):  # if any " " in all table, returns Game not finished
             return 'Game not finished'
