@@ -22,6 +22,9 @@ class TicTacToe:
         self.field = [[' ' for _ in range(3)] for _ in range(3)]
         self.gamer = None
 
+    def set_gamer_to_move(self, gamer: str) -> None:
+        self.gamer = gamer
+
     def greet(self):
         print("\n-----------------")
         print("  Greeting you   ")

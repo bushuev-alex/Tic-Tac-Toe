@@ -3,7 +3,7 @@ from tictactoe import TicTacToe
 
 my_game = TicTacToe()
 my_game.greet()
-my_game.gamer = "X"
+my_game.set_gamer_to_move("X")
 my_game.draw_table()
 
 while True:
