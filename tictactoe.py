@@ -129,13 +129,13 @@ class TicTacToe:
 
     def get_game_result(self, field_lines: FieldLines) -> str:
         all_lines = field_lines.rows + field_lines.cols + field_lines.diag_lr + field_lines.diag_rl
-        if any(map(lambda x: x == "XXX", all_lines)):  # "XXX" in row/col, returns X wins
+        if any((x == "XXX" for x in all_lines)):  # "XXX" in row/col, returns X wins
             return 'X wins'
-        elif any(map(lambda x: x == "OOO", all_lines)):  # "OOO" in row/col, returns O wins
+        elif any((x == "OOO" for x in all_lines)):  # "OOO" in row/col, returns O wins
             return 'O wins'
-        elif all(map(lambda x: " " not in x, field_lines.rows)):  # no " " in all table and nobody wins, returns Draw
+        elif all((" " not in x for x in field_lines.rows)):  # no " " in all table and nobody wins, returns Draw
             return 'Draw'
-        elif any(map(lambda x: " " in x, field_lines.rows)):  # if any " " in all table, returns Game not finished
+        elif any((" " in x for x in field_lines.rows)):  # if any " " in all table, returns Game not finished
             return 'Game not finished'
         else:
             return 'Impossible'
