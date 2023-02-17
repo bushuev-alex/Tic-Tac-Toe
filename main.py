@@ -4,6 +4,7 @@ from tictactoe import TicTacToe
 my_game = TicTacToe()
 command, levels = my_game.get_command_and_gamers()
 
+
 if command == "start":
     my_game.set_levels_to_gamers(levels)
     my_game.greet()
